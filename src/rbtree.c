@@ -4,7 +4,10 @@
 
 rbtree *new_rbtree(void) {
   rbtree *p = (rbtree *)calloc(1, sizeof(rbtree));
-  // TODO: initialize struct if needed
+  node_t *nil = (node_t *)malloc(sizeof(node_t));
+  nil->color = RBTREE_BLACK;
+  p->nil = nil;
+  p->root = nil;
   return p;
 }
 
@@ -19,7 +22,9 @@ node_t *rbtree_insert(rbtree *t, const key_t key) {
 }
 
 node_t *rbtree_find(const rbtree *t, const key_t key) {
-  // TODO: implement find
+  // node_t *root = t->root;
+  
+
   return t->root;
 }
 
