@@ -88,16 +88,13 @@ void rbtree_insert_fixup(rbtree *t, node_t *n) {
     if (n->parent == n->parent->parent->left) { // 자식의 부모가 할배의 왼쪽
       if (n->parent->parent->right->color == RBTREE_BLACK) { // 삼촌이 검정
         if (n == n->parent->right) {
-          // case 3
           n = n->parent;
           left_rotate(t, n); 
         } 
-        // case 2, 3
         n->parent->color = RBTREE_BLACK;
         n->parent->parent->color = RBTREE_RED;
         right_rotate(t, n->parent->parent);
       } else {
-        // case 1
         n->parent->parent->color = RBTREE_RED;
         n->parent->color = RBTREE_BLACK;
         n->parent->parent->right->color = RBTREE_BLACK;
@@ -106,16 +103,13 @@ void rbtree_insert_fixup(rbtree *t, node_t *n) {
     } else {
       if (n->parent->parent->left->color == RBTREE_BLACK) { // 삼촌이 검정
         if (n == n->parent->left) {
-          // case 3
           n = n->parent;
           right_rotate(t, n); 
         } 
-        // case 2, 3
         n->parent->color = RBTREE_BLACK;
         n->parent->parent->color = RBTREE_RED;
         left_rotate(t, n->parent->parent);
       } else {
-        // case 1
         n->parent->parent->color = RBTREE_RED;
         n->parent->color = RBTREE_BLACK;
         n->parent->parent->left->color = RBTREE_BLACK;
