@@ -9,17 +9,11 @@ typedef void (*rotate)(rbtree *, node_t *);
 
 typedef enum { INSERT_CASE_1, INSERT_CASE_2, INSERT_CASE_3 } insert_fixup_case;
 typedef enum { ERASE_CASE_1, ERASE_CASE_2, ERASE_CASE_3, ERASE_CASE_4 } erase_fixup_case;
-typedef enum { PTR, D_PTR } node_ptr_type;
 
 typedef union {
   node_t *ptr;
   node_t **d_ptr;
 } node_ptr;
-
-typedef struct {
-  node_ptr ex_node;
-  node_ptr u;
-} erase_fixup_ptr;
 
 typedef struct {
   get_node get_op_child;
@@ -296,6 +290,7 @@ void right_erase_fixup(erase_fixup_case c, rbtree *t, node_t **ex_node, node_t *
   erase_fixup_ctx ctx = { get_right, get_left, right_rotate, left_rotate };
   erase_fixup(c, t, ex_node, u, ctx);
 }
+
 void rbtree_erase_fixup(rbtree *t, node_t *ex_node) {
   node_t *u;
   while (ex_node != t->root && ex_node->color == RBTREE_BLACK) {
